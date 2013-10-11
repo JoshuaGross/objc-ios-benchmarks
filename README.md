@@ -2,6 +2,19 @@
 
 Objective-C iOS benchmarks for better understanding of Objective-C and the Objective-C runtime on iOS.
 
+## BenchmarkWeakVsStrong
+
+Is accessing a weak pointer faster, slower, or the same speed as accessing a strong pointer? Who cares?!
+Apparently, I do. If you need a weak pointer, there probably isn't a good way around that - but if they incur
+performance penalties, we may want to treat them differently than strong pointers. As it turns out, they're 
+quite a bit slower to access than strong pointers. This implies that Objective-C under iOS does not use
+zeroing weak pointers. If you use a weak pointer more than once in a particular code block, it makes sense
+to temporarily cast it to a strong pointer so you only incur that performance penalty once.
+
+### Benchmark Results (iOS 7 ,iPhone 5)
+* Execution time of Weak pointer: 20.823044
+* Execution time of Strong pointer: 12.632833
+
 ## BenchmarkArrayDeduplication
 
 Benchmarks for different ways of filtering duplicates in Objective-C (specifically on iOS).
