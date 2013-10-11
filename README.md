@@ -15,6 +15,16 @@ to temporarily cast it to a strong pointer so you only incur that performance pe
 * Execution time of Weak pointer: 20.823044
 * Execution time of Strong pointer: 12.632833
 
+## BenchmarkTryCatch
+
+Predictably, running code in a try/catch block as opposed to outside of a try/catch block is between 2-5 times slower.
+ Actually throwing an error is extremely expensive. No surprises here. Don't use NSExceptions for flow control.
+
+### Benchmark Results (iOS 7 ,iPhone 5)
+* Execution time of No try/catch: 0.991090
+* Execution time of Try/catch, no exception: 2.226909
+* Execution time of Try/catch, exception: 3119.177997
+
 ## BenchmarkArrayDeduplication
 
 Benchmarks for different ways of filtering duplicates in Objective-C (specifically on iOS).
