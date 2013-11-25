@@ -43,7 +43,7 @@ quite a bit slower to access than strong pointers. This implies that Objective-C
 zeroing weak pointers. If you use a weak pointer more than once in a particular code block, it makes sense
 to temporarily cast it to a strong pointer so you only incur that performance penalty once.
 
-### Benchmark Results (iOS 7 ,iPhone 5)
+### Benchmark Results (iOS 7, iPhone 5)
 * Execution time of Weak pointer: 20.823044
 * Execution time of Strong pointer: 12.632833
 
@@ -52,7 +52,7 @@ to temporarily cast it to a strong pointer so you only incur that performance pe
 Predictably, running code in a try/catch block as opposed to outside of a try/catch block is between 2-5 times slower.
  Actually throwing an error is extremely expensive. No surprises here. Don't use NSExceptions for flow control.
 
-### Benchmark Results (iOS 7 ,iPhone 5)
+### Benchmark Results (iOS 7, iPhone 5)
 * Execution time of No try/catch: 0.991090
 * Execution time of Try/catch, no exception: 2.226909
 * Execution time of Try/catch, exception: 3119.177997
@@ -89,7 +89,7 @@ With duplicated data:
 What's the fastest way to find the first occurrence of a character in a string? If you can create an NSCharacterSet once and reuse it, `rangeOfCharacterFromSet` is
 fastest. Otherwise, `rangeOfString` is the way to go.
 
-### Benchmark Results (iOS 7 ,iPhone 5)
+### Benchmark Results (iOS 7, iPhone 5)
 * Execution time of static character set: 1.799306
 * Execution time of rangeOfString: 3.759440
 * Execution time of character set: 6.714541
