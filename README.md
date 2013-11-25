@@ -33,6 +33,7 @@ performance difference. It may even degrade performance, except for very small a
 * Execution time of Insert 10000000 elements into array, no capacity: 19.417706
 * Execution time of Insert 10000000 elements into array, WITH capacity: 20.109480
 * Execution time of Insert 10000000 elements into array, WITH 10 extra capacity: 19.782185
+* Execution time of Insert 10000000 elements into array, WITH 2x extra capacity: **crash**
 
 ## BenchmarkWeakVsStrong
 
