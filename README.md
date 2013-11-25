@@ -2,6 +2,38 @@
 
 Objective-C iOS benchmarks for better understanding of Objective-C and the Objective-C runtime on iOS.
 
+## BenchmarkInitWithCapacity
+As far as I can tell, using `initWithCapacity` instead of simply `init` for an NSArray makes no measurable
+performance difference. It may even degrade performance, except for very small arrays. Hard to tell.
+
+* Execution time of Insert 10 elements into array, no capacity: 0.000047
+* Execution time of Insert 10 elements into array, WITH capacity: 0.000043
+* Execution time of Insert 10 elements into array, WITH 10 extra capacity: 0.000026
+* Execution time of Insert 10 elements into array, WITH 2x extra capacity: 0.000024
+* Execution time of Insert 100 elements into array, no capacity: 0.000264
+* Execution time of Insert 100 elements into array, WITH capacity: 0.000251
+* Execution time of Insert 100 elements into array, WITH 10 extra capacity: 0.000261
+* Execution time of Insert 100 elements into array, WITH 2x extra capacity: 0.000260
+* Execution time of Insert 1000 elements into array, no capacity: 0.003090
+* Execution time of Insert 1000 elements into array, WITH capacity: 0.002595
+* Execution time of Insert 1000 elements into array, WITH 10 extra capacity: 0.002413
+* Execution time of Insert 1000 elements into array, WITH 2x extra capacity: 0.002566
+* Execution time of Insert 10000 elements into array, no capacity: 0.024363
+* Execution time of Insert 10000 elements into array, WITH capacity: 0.023436
+* Execution time of Insert 10000 elements into array, WITH 10 extra capacity: 0.023212
+* Execution time of Insert 10000 elements into array, WITH 2x extra capacity: 0.020758
+* Execution time of Insert 100000 elements into array, no capacity: 0.196063
+* Execution time of Insert 100000 elements into array, WITH capacity: 0.199435
+* Execution time of Insert 100000 elements into array, WITH 10 extra capacity: 0.196639
+* Execution time of Insert 100000 elements into array, WITH 2x extra capacity: 0.197356
+* Execution time of Insert 1000000 elements into array, no capacity: 1.955455
+* Execution time of Insert 1000000 elements into array, WITH capacity: 1.990783
+* Execution time of Insert 1000000 elements into array, WITH 10 extra capacity: 1.998382
+* Execution time of Insert 1000000 elements into array, WITH 2x extra capacity: 1.956192
+* Execution time of Insert 10000000 elements into array, no capacity: 19.417706
+* Execution time of Insert 10000000 elements into array, WITH capacity: 20.109480
+* Execution time of Insert 10000000 elements into array, WITH 10 extra capacity: 19.782185
+
 ## BenchmarkWeakVsStrong
 
 Is accessing a weak pointer faster, slower, or the same speed as accessing a strong pointer? Who cares?!

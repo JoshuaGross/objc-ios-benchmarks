@@ -10,12 +10,58 @@
 
 @implementation JGAppDelegate
 
+- (CGFloat)measureBlockExecutionTime:(void (^)(void))block withLabel:(NSString *)label
+{
+    NSDate *before = [NSDate date];
+    block();
+    NSDate *apres = [NSDate date];
+    CGFloat interval = [apres timeIntervalSinceDate:before];
+    NSLog(@"Execution time of %@: %f", label, interval);
+    return interval;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
+    // Test `initWithCapacity`
+    NSUInteger numOfIterations = 10;
+
+    for (NSUInteger i = 0; i < numOfIterations; i++) {
+        NSUInteger maxElements = pow(10, i+1);
+
+        [self measureBlockExecutionTime:^{
+            NSMutableArray *ary = [[NSMutableArray alloc] init];
+            for (NSUInteger j = 0; j < maxElements; j++) {
+                [ary addObject:@(j)];
+            }
+        } withLabel:[NSString stringWithFormat:@"Insert %d elements into array, no capacity", maxElements]];
+
+        [self measureBlockExecutionTime:^{
+            NSMutableArray *ary = [[NSMutableArray alloc] initWithCapacity:maxElements];
+            for (NSUInteger j = 0; j < maxElements; j++) {
+                [ary addObject:@(j)];
+            }
+        } withLabel:[NSString stringWithFormat:@"Insert %d elements into array, WITH capacity", maxElements]];
+
+        [self measureBlockExecutionTime:^{
+            NSMutableArray *ary = [[NSMutableArray alloc] initWithCapacity:maxElements+10];
+            for (NSUInteger j = 0; j < maxElements; j++) {
+                [ary addObject:@(j)];
+            }
+        } withLabel:[NSString stringWithFormat:@"Insert %d elements into array, WITH 10 extra capacity", maxElements]];
+
+        [self measureBlockExecutionTime:^{
+            NSMutableArray *ary = [[NSMutableArray alloc] initWithCapacity:maxElements*2];
+            for (NSUInteger j = 0; j < maxElements; j++) {
+                [ary addObject:@(j)];
+            }
+        } withLabel:[NSString stringWithFormat:@"Insert %d elements into array, WITH 2x extra capacity", maxElements]];
+    }
+
     return YES;
 }
 
