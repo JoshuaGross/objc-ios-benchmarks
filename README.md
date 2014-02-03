@@ -38,11 +38,9 @@ performance difference. It may even degrade performance, except for very small a
 ## BenchmarkWeakVsStrong
 
 Is accessing a weak pointer faster, slower, or the same speed as accessing a strong pointer? Who cares?!
-Apparently, I do. If you need a weak pointer, there probably isn't a good way around that - but if they incur
-performance penalties, we may want to treat them differently than strong pointers. As it turns out, they're 
-quite a bit slower to access than strong pointers. This implies that Objective-C under iOS does not use
-zeroing weak pointers. If you use a weak pointer more than once in a particular code block, it makes sense
-to temporarily cast it to a strong pointer so you only incur that performance penalty once.
+Apparently, I do. If you need a weak pointer, this may be a moot point - but if they incur
+significant performance penalties, we may want to treat them differently than strong pointers. As it turns out, they're 
+quite a bit slower to access than strong pointers. This implies that Objective-C under iOS does some extra bookwork that might not be immediately intuitive; see [Jody Hagins' comments](https://github.com/JoshuaGross/objc-ios-benchmarks/issues/1). If you use a weak pointer more than once in a particular code block, it makes sense to cast it back to a strong pointer in the lexical scope you're using it, so you only incur that performance penalty once.
 
 ### Benchmark Results (iOS 7, iPhone 5)
 * Execution time of Weak pointer: 20.823044
